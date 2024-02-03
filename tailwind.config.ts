@@ -16,5 +16,15 @@ const config: Config = {
     },
   },
   plugins: [],
+  safelist: [
+    'w-5',
+    'flex',
+    'justify-center',
+    'items-center',
+    'rounded-full',
+    'bg-orange-300',
+    'bg-green-300',
+    'text-slate-400',
+  ],
 };
 export default config;
