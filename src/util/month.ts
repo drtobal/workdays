@@ -59,10 +59,10 @@ export const isDayMayor = (a: Date, b: Date): boolean => {
 
 /** returns the classname for holiday html element in calendar */
 export const getDayClassName = (date: Day, month: Date): string => {
-    const className: string[] = ['w-5 flex justify-center items-center rounded-full'];
+    const className: string[] = ['w-6 h-6 flex justify-center items-center rounded-full'];
     if (date.date.getMonth() === month.getMonth()) {
-        if (!date.isBefore) {
-            className.push(date.isWorkday ? 'bg-orange-300' : 'bg-green-300');
+        if (!date.isBefore && date.isWorkday) {
+            className.push('bg-slate-400 text-white');
         }
     } else {
         className.push('text-slate-400');

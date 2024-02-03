@@ -30,13 +30,14 @@ export default function Month() {
     }
 
     return <>
-        <div className="m-auto flex flex-col gap-3 max-w-md text-xs py-6">
+        <div className="m-auto flex flex-col gap-3 max-w-md text-xs py-6 px-4">
+            <h1 className="text-lg">Calculadora de turnos 😃</h1>
             <div className="shadow-lg bg-white rounded-lg p-4 w-full flex flex-col gap-2">
                 <div className="flex flex-row justify-between gap-2 pb-2">
                     <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onClick={goPrev}>
                         Anterior
                     </button>
-                    <p className="text-center text-base">{format(month, 'MMMM yyyy', { locale })}</p>
+                    <p className="text-center text-sm">{format(month, 'MMMM yyyy', { locale })}</p>
                     <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onClick={goNext}>
                         Siguiente
                     </button>
