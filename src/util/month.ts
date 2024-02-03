@@ -16,7 +16,7 @@ export const getMonthCalendar = (month: Date, start: Date, interval: boolean[], 
     const dates: Day[][] = [];
     const intervalLength = interval.length;
     const monthNumber: number = month.getMonth();
-    let currentDate: Date = parse(`${month.getFullYear()}-${month.getMonth() + 1}-01`, 'yyyy-M-dd', new Date());
+    let currentDate: Date = parse(`${month.getFullYear()}-${month.getMonth() + 1}-01`, 'yyyy-MM-dd', new Date());
 
     if (currentDate.getDay() !== 1) { // print from monday
         currentDate = previousMonday(currentDate);
@@ -66,13 +66,12 @@ export const getDayClassName = (date: Day, month: Date): string => {
             className.push('bg-slate-400 text-white');
         }
     } else {
+        if (!date.isBefore && date.isWorkday) {
+            className.push('bg-slate-300 text-white');
+        }
         className.push('text-slate-400');
     }
     return className.join(' ');
-}
-
-export const saveStart = (start: number): void => {
-    setLS(START_LS, JSON.stringify(start));
 }
 
 export const getWorkdays = (): number => {

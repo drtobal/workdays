@@ -3,7 +3,8 @@
 import { FREEDAYS_LS, START_LS, WORKDAYS_LS } from "@/constants";
 import { saveNumberFromInput } from "@/util/month";
 import { ChangeEvent, useState } from "react";
-import { format } from "date-fns";
+import { format, parse } from "date-fns";
+import { setLS } from "@/util/util";
 
 type Props = {
     onChange: () => void,
@@ -26,14 +27,18 @@ export default function Form(props: Props) {
         saveNumber(event, WORKDAYS_LS);
     }
 
-    const onChangeStart = (event: ChangeEvent<HTMLInputElement>): void => {
-        setStart(event.target.value);
-        saveNumber(event, START_LS);
-    }
-
     const onChangeFreeDays = (event: ChangeEvent<HTMLInputElement>): void => {
         setFreeDays(event.target.valueAsNumber);
         saveNumber(event, FREEDAYS_LS);
+    }
+
+    const onChangeStart = (event: ChangeEvent<HTMLInputElement>): void => {
+        setStart(event.target.value);
+        const date = parse(event.target.value, 'yyyy-MM-dd', new Date());
+        if (!isNaN(date.valueOf())) {
+            setLS(START_LS, JSON.stringify(date.valueOf()));
+            props.onChange();
+        }
     }
 
     const saveNumber = (event: ChangeEvent<HTMLInputElement>, slot: string) => {

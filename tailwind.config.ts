@@ -25,6 +25,7 @@ const config: Config = {
     'rounded-full',
     'text-slate-400',
     'bg-slate-400',
+    'bg-slate-300',
     'text-white',
   ],
 };
