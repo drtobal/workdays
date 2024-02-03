@@ -1,3 +1,5 @@
+import { FooterLink } from "./types";
+
 const LS_PREFIX = 'workdays_';
 
 export const DEFAULT_WORKDAYS = 4;
@@ -11,3 +13,9 @@ export const START_LS = `${LS_PREFIX}start`;
 export const WORKDAYS_LS = `${LS_PREFIX}workdays`;
 
 export const FREEDAYS_LS = `${LS_PREFIX}freedays`;
+
+export const FOOTER_LINKS: FooterLink[] = [
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/cristobal-diaz-alvarez/' },
+    { label: 'Github', url: 'https://github.com/drtobal' },
+    { label: 'Stack Overflow', url: 'https://stackoverflow.com/users/7827198' },
+];

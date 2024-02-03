@@ -5,6 +5,7 @@ import { getDayClassName, getFreedays, getInterval, getMonthCalendar, getStart, 
 import { Month, add, format, startOfMonth } from "date-fns";
 import { useState } from "react";
 import { es as locale } from "date-fns/locale/es";
+import Form from './form';
 
 export default function Month() {
     const [month, setMonth] = useState<Date>(startOfMonth(new Date()));
@@ -29,9 +30,22 @@ export default function Month() {
         setDays(getMonthCalendar(newMonth, start, getInterval(workDays, freeDays), new Date()));
     }
 
+    const onFormChanged = (): void => {
+        const start = getStart();
+        const workDays = getWorkdays();
+        const freeDays = getFreedays();
+        setStart(start);
+        setWorkDays(workDays);
+        setFreeDays(freeDays);
+        setDays(getMonthCalendar(month, start, getInterval(workDays, freeDays), new Date()));
+    }
+
     return <>
-        <div className="m-auto flex flex-col gap-3 max-w-md text-xs py-6 px-4">
+        <div className="m-auto flex flex-col gap-3 max-w-md text-xs py-6 px-4 gap-4">
             <h1 className="text-lg">Calculadora de turnos 😃</h1>
+
+            <p className="flex flex-row items-center gap-1"><div className="w-6 h-6 bg-slate-400 rounded-full"></div>Día de trabajo</p>
+
             <div className="shadow-lg bg-white rounded-lg p-4 w-full flex flex-col gap-2">
                 <div className="flex flex-row justify-between gap-2 pb-2">
                     <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onClick={goPrev}>
@@ -55,6 +69,8 @@ export default function Month() {
                     {week.map((day, k) => <div key={k} className={getDayClassName(day, month)}>{day.date.getDate()}</div>)}
                 </div>)}
             </div>
+
+            <Form onChange={onFormChanged} start={start} workDays={workDays} freeDays={freeDays} />
         </div>
     </>;
 }

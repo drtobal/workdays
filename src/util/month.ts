@@ -2,6 +2,7 @@ import { add, intervalToDuration, parse, previousMonday } from "date-fns";
 import { Day } from "@/types";
 import { getLS, setLS } from "./util";
 import { DEFAULT_FREEDAYS, DEFAULT_START, DEFAULT_WORKDAYS, FREEDAYS_LS, START_LS, WORKDAYS_LS } from "@/constants";
+import { ChangeEvent } from "react";
 
 export const getInterval = (workdays: number, freedays: number): boolean[] => {
     const interval: boolean[] = [];
@@ -82,18 +83,18 @@ export const getFreedays = (): number => {
     return getNumber(FREEDAYS_LS) || DEFAULT_FREEDAYS;
 }
 
-export const saveWorkdays = (days: number): void => {
-    setLS(WORKDAYS_LS, JSON.stringify(days));
-}
-
-export const saveFreedays = (days: number): void => {
-    setLS(FREEDAYS_LS, JSON.stringify(days));
-}
-
 export const getNumber = (slot: string): number | null => {
     const data = getLS<number>(slot);
     if (data && !isNaN(data)) {
         return data;
     }
     return null;
+}
+
+export const saveNumberFromInput = (event: ChangeEvent<HTMLInputElement>, slot: string): boolean => {
+    if (!isNaN(event.target.valueAsNumber) && event.target.valueAsNumber > 0) {
+        setLS(slot, JSON.stringify(event.target.valueAsNumber));
+        return true;
+    }
+    return false;
 }
