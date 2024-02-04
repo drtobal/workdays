@@ -1,8 +1,9 @@
-import { add, parse, previousMonday, differenceInDays, isSameDay } from "date-fns";
+import { add, previousMonday, differenceInDays, isSameDay } from "date-fns";
 import { Day } from "@/types";
 import { getLS, setLS } from "./util";
 import { DEFAULT_FREEDAYS, DEFAULT_START, DEFAULT_WORKDAYS, FREEDAYS_LS, START_LS, WORKDAYS_LS } from "@/constants";
 import { ChangeEvent } from "react";
+import { startOfMonth } from "../../node_modules/date-fns/startOfMonth";
 
 export const getInterval = (workdays: number, freedays: number): boolean[] => {
     const interval: boolean[] = [];
@@ -16,7 +17,7 @@ export const getMonthCalendar = (month: Date, start: Date, interval: boolean[], 
     const dates: Day[][] = [];
     const intervalLength = interval.length;
     const monthNumber: number = month.getMonth();
-    let currentDate: Date = parse(`${month.getFullYear()}-${month.getMonth() + 1}-01`, 'yyyy-MM-dd', new Date());
+    let currentDate: Date = startOfMonth(new Date(month.valueOf()));
 
     if (currentDate.getDay() !== 1) { // print from monday
         currentDate = previousMonday(currentDate);
