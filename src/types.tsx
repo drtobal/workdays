@@ -2,8 +2,8 @@ import { ReactElement } from "react";
 
 /** day displayed in calendar */
 export type Day = {
-    date: Date,
-    isWorkday: boolean,
+    date: Date;
+    isWorkday: boolean;
 };
 
 /** kind of child to render inside a component */
