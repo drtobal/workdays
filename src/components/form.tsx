@@ -76,7 +76,7 @@ export default function Form(props: Props) {
 
         <p className="py-4">El cáculo se hace por períodos de días trabajados y días libres, por ejemplo si tiene turnos
             de 4x2 (4 días trabajados y después 2 libres), el período es de 6 días, y terminado ese período se comienza
-            el cálculo de uno nuevo. Utilice la fecha de inicio de período para hacer coincidir sus turnos con el cálculo
-            del calendario.</p>
+            el cálculo de uno nuevo.<br />
+            Utilice la fecha de inicio de período para hacer coincidir sus turnos con el cálculo del calendario.</p>
     </div>;
 }

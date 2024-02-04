@@ -4,6 +4,7 @@ import { ReactElement } from "react";
 export type Day = {
     date: Date;
     isWorkday: boolean;
+    isToday: boolean;
 };
 
 /** kind of child to render inside a component */

@@ -27,6 +27,10 @@ const config: Config = {
     'bg-slate-400',
     'bg-slate-300',
     'text-white',
+    'border-slate-300',
+    'border-slate-400',
+    'border-green-500',
+    'border-2',
   ],
 };
 export default config;

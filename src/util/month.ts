@@ -1,4 +1,4 @@
-import { add, intervalToDuration, parse, previousMonday, format, differenceInDays } from "date-fns";
+import { add, parse, previousMonday, differenceInDays, isSameDay } from "date-fns";
 import { Day } from "@/types";
 import { getLS, setLS } from "./util";
 import { DEFAULT_FREEDAYS, DEFAULT_START, DEFAULT_WORKDAYS, FREEDAYS_LS, START_LS, WORKDAYS_LS } from "@/constants";
@@ -33,6 +33,7 @@ export const getMonthCalendar = (month: Date, start: Date, interval: boolean[], 
 
         dates[datesLength - 1].push({
             date: new Date(currentDate.valueOf()),
+            isToday: isSameDay(today, currentDate),
             isWorkday: interval[Math.abs(differenceInDays(currentDate, start)) % intervalLength],
         });
 
@@ -59,14 +60,17 @@ export const isDayMayor = (a: Date, b: Date): boolean => {
 
 /** returns the classname for holiday html element in calendar */
 export const getDayClassName = (date: Day, month: Date): string => {
-    const className: string[] = ['w-6 h-6 flex justify-center items-center rounded-full'];
+    const className: string[] = ['w-6 h-6 flex justify-center items-center rounded-full border-2'];
     if (date.date.getMonth() === month.getMonth()) {
         if (date.isWorkday) {
-            className.push('bg-slate-400 text-white');
+            className.push('bg-slate-400 border-slate-400 text-white');
+        }
+        if (date.isToday) {
+            className.push('border-green-500');
         }
     } else {
         if (date.isWorkday) {
-            className.push('bg-slate-300 text-white');
+            className.push('bg-slate-300 border-slate-300 text-white');
         }
         className.push('text-slate-400');
     }
