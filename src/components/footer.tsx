@@ -1,3 +1,5 @@
+'use client';
+
 import { FOOTER_LINKS } from "@/constants";
 import { FooterLink, ReachChild } from "@/types";
 

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { FREEDAYS_LS, START_LS, WORKDAYS_LS } from "@/constants";
 import { saveNumberFromInput } from "@/util/month";
@@ -15,23 +15,30 @@ type Props = {
 
 const inputClass = 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500';
 
+/** displays a form to edit data to calculate woking days and free days */
 export default function Form(props: Props) {
+    /** start of the interval */
     const [start, setStart] = useState<string>(format(props.start, 'yyyy-MM-dd'));
 
+    /** wotking days at start of the interval */
     const [workDays, setWorkDays] = useState<number>(props.workDays);
 
+    /** free days at the end of the interval */
     const [freeDays, setFreeDays] = useState<number>(props.freeDays);
 
+    /** update internal value and try to edit stored value and then emit changes to the parent */
     const onChangeWorkDays = (event: ChangeEvent<HTMLInputElement>): void => {
         setWorkDays(event.target.valueAsNumber);
         saveNumber(event, WORKDAYS_LS);
     }
 
+    /** update internal value and try to edit stored value and then emit changes to the parent */
     const onChangeFreeDays = (event: ChangeEvent<HTMLInputElement>): void => {
         setFreeDays(event.target.valueAsNumber);
         saveNumber(event, FREEDAYS_LS);
     }
 
+    /** update internal value and try to edit stored value and then emit changes to the parent */
     const onChangeStart = (event: ChangeEvent<HTMLInputElement>): void => {
         setStart(event.target.value);
         const date = parse(event.target.value, 'yyyy-MM-dd', new Date());
@@ -41,6 +48,7 @@ export default function Form(props: Props) {
         }
     }
 
+    /** save number value into the storage and if it could, emits changes to the parent */
     const saveNumber = (event: ChangeEvent<HTMLInputElement>, slot: string) => {
         if (saveNumberFromInput(event, slot)) {
             props.onChange();

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { Day } from "@/types";
 import { getDayClassName, getFreedays, getInterval, getMonthCalendar, getStart, getWorkdays } from "@/util/month";
@@ -7,29 +7,38 @@ import { useState } from "react";
 import { es as locale } from "date-fns/locale/es";
 import Form from './form';
 
+/** displays a month with working days and free days */
 export default function Month() {
+    /** current displaying month, date with start of the month */
     const [month, setMonth] = useState<Date>(startOfMonth(new Date()));
 
+    /** start date of the interval */
     const [start, setStart] = useState<Date>(getStart());
 
+    /** start working days of the interval */
     const [workDays, setWorkDays] = useState<number>(getWorkdays());
 
+    /** end free days of the interval */
     const [freeDays, setFreeDays] = useState<number>(getFreedays());
 
+    /** days displayed in the current month/calendar */
     const [days, setDays] = useState<Day[][]>(getMonthCalendar(month, start, getInterval(workDays, freeDays), new Date()));
 
+    /** go to previous month */
     const goPrev = (): void => {
         const newMonth = add(month, { months: -1 });
         setMonth(newMonth);
         setDays(getMonthCalendar(newMonth, start, getInterval(workDays, freeDays), new Date()));
     }
 
+    /** go to next month */
     const goNext = (): void => {
         const newMonth = add(month, { months: 1 });
         setMonth(newMonth);
         setDays(getMonthCalendar(newMonth, start, getInterval(workDays, freeDays), new Date()));
     }
 
+    /** on form change, update the entire view */
     const onFormChanged = (): void => {
         const start = getStart();
         const workDays = getWorkdays();

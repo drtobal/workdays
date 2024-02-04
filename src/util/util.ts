@@ -1,4 +1,4 @@
-
+/** get data from the local storage of null if it can't */
 export const getLS = <T>(key: string): T | null => {
     if (typeof window !== 'undefined') {
         try {
@@ -13,6 +13,7 @@ export const getLS = <T>(key: string): T | null => {
     return null;
 }
 
+/** save data into localstorage */
 export const setLS = <T>(key: string, data: string): void => {
     if (typeof window !== 'undefined') {
         try {
